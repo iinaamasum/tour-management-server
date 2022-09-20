@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "author": "iinaamasum",
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
