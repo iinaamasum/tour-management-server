@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = process.env.PORT || '5001';
 
+// middleware
 app.use(cors());
 app.use(express.json());
 
+// root route
 app.all('/', async (req, res, next) => {
   res.status(200).json({
     status: 'ok',
@@ -13,6 +14,4 @@ app.all('/', async (req, res, next) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`App is running at port ${port}`);
-});
+module.exports = app;
