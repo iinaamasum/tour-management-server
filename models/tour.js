@@ -22,6 +22,11 @@ const tourSchema = mongoose.Schema({
     trim: true,
     maxLength: [100, 'place name should be max of 100 char'],
   },
+
+  imgURL: {
+    type: String,
+    validate: [validator.isURL, 'Please provide a valid img URL!'],
+  },
   description: {
     type: String,
     required: {
@@ -50,3 +55,6 @@ const tourSchema = mongoose.Schema({
     },
   },
 });
+
+const Tour = mongoose.model('Tour', tourSchema);
+exports = Tour;
