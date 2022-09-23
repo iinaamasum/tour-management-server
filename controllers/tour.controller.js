@@ -1,6 +1,6 @@
 exports.getAllTour = async (req, res, next) => {
   try {
-    const allTour = await getAllTourService();
+    const allTour = await getAllTourService({});
     if (allTour.length === 0) {
       res.status(400).json({
         status: 'failed',
