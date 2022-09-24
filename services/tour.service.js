@@ -33,3 +33,13 @@ exports.patchTourByIDService = async (id, data) => {
   );
   return result;
 };
+
+exports.getTrendingTopTourService = async () => {
+  const result = await TourModel.find().sort({ viewCount: -1 }).limit(3);
+  return result;
+};
+
+exports.getCheapestTourService = async () => {
+  const result = await TourModel.find().sort({ cost: 1 }).limit(3);
+  return result;
+};

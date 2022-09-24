@@ -3,6 +3,8 @@ const {
   postTour,
   getTourByIDService,
   patchTourByIDService,
+  getTrendingTopTourService,
+  getCheapestTourService,
 } = require('../services/tour.service');
 const TourModel = require('../models/tour.model.js');
 
@@ -109,12 +111,34 @@ exports.patchTourByID = async (req, res, next) => {
 };
 
 exports.getTrendingTopTour = async (req, res, next) => {
-  const topTrendingTour = await TourModel.find()
-    .sort({ viewCount: -1 })
-    .limit(3);
+  try {
+    const topTrendingTour = await getTrendingTopTourService();
+    if (topTrendingTour.length === 0) {
+      res.status(400).json({
+        status: 'failed',
+        message: 'No data found. Please populate first then search.',
+        topTrendingTour,
+      });
+    }
+    res.status(200).json({
+      status: 'success',
+      message: 'Got the trending tour. @param array of objects.',
+      topTrendingTour,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'failed',
+      message: 'Server error. No data found.',
+      error,
+    });
+  }
+};
+
+exports.getCheapestTour = async (req, res, next) => {
+  const cheapestTour = await getCheapestTourService();
   res.status(400).json({
     status: 'failed',
     message: 'Server error. No data found.',
-    topTrendingTour,
+    cheapestTour,
   });
 };
