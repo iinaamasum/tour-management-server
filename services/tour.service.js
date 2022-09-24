@@ -10,3 +10,8 @@ exports.postTour = async (data) => {
   const result = await modelData.save(data);
   return result;
 };
+
+exports.getTourByIDService = (id) => {
+  const result = TourModel.findById(id);
+  return result;
+};

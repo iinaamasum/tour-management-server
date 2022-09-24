@@ -1,4 +1,8 @@
-const { getAllTourService, postTour } = require('../services/tour.service');
+const {
+  getAllTourService,
+  postTour,
+  getTourByIDService,
+} = require('../services/tour.service');
 const TourModel = require('../models/tour.model.js');
 
 exports.getAllTour = async (req, res, next) => {
@@ -19,7 +23,7 @@ exports.getAllTour = async (req, res, next) => {
   } catch (error) {
     res.status(400).json({
       status: 'failed',
-      message: "Can't process all tour for the route",
+      message: 'Server Error. Something went wrong.',
       error: error,
     });
   }
@@ -44,7 +48,33 @@ exports.postTour = async (req, res, next) => {
   } catch (error) {
     res.status(400).json({
       status: 'failed',
-      message: "Can't update the tour.",
+      message: 'Server Error. Something went wrong.',
+      error,
+    });
+  }
+};
+
+exports.getTourByID = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await getTourByIDService(id);
+    if (!result._id) {
+      res.status(400).json({
+        status: 'failed',
+        message: `Can't find tour with the ${id}. Please check the id again.`,
+        error,
+      });
+    }
+    res.status(200).json({
+      status: 'success',
+      message: `Below data is the tour with ${id}. @param -> object`,
+      result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'failed',
+      message:
+        'Server Error. Something went wrong. Maybe you entered wrong ObjectId',
       error,
     });
   }
