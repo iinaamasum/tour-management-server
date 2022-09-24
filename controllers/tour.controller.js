@@ -1,9 +1,9 @@
-const { getAllTourService } = require('../services/tour.service');
+const { getAllTourService, postTour } = require('../services/tour.service');
 const TourModel = require('../models/tour.model.js');
 
 exports.getAllTour = async (req, res, next) => {
   try {
-    const allTour = await TourModel.find({});
+    const allTour = await getAllTourService({});
     if (allTour.length === 0) {
       res.status(400).json({
         status: 'failed',
@@ -28,8 +28,7 @@ exports.getAllTour = async (req, res, next) => {
 exports.postTour = async (req, res, next) => {
   try {
     const data = req.body;
-    const modelData = new TourModel(data);
-    const result = await modelData.save(data);
+    const result = await postTour(data);
     if (!result._id) {
       res.status(400).json({
         status: 'failed',
