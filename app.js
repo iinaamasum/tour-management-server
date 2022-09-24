@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // route section
-app.use('/api/v1/tours', tourRoute);
+app.use('/api/v1/', tourRoute);
 
 // root route
 app.all('/', async (req, res, next) => {

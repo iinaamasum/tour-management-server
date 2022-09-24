@@ -1,6 +1,10 @@
+const { getAllTourService } = require('../services/tour.service');
+const Tour = require('../models/tour.model');
+
 exports.getAllTour = async (req, res, next) => {
   try {
-    const allTour = await getAllTourService({});
+    const allTour = await Tour.find();
+    console.log(allTour);
     if (allTour.length === 0) {
       res.status(400).json({
         status: 'failed',
@@ -17,6 +21,7 @@ exports.getAllTour = async (req, res, next) => {
     res.status(400).json({
       status: 'failed',
       message: "Can't process all tour for the route",
+      error: error,
     });
   }
 };
