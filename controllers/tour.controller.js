@@ -135,10 +135,25 @@ exports.getTrendingTopTour = async (req, res, next) => {
 };
 
 exports.getCheapestTour = async (req, res, next) => {
-  const cheapestTour = await getCheapestTourService();
-  res.status(400).json({
-    status: 'failed',
-    message: 'Server error. No data found.',
-    cheapestTour,
-  });
+  try {
+    const cheapestTour = await getCheapestTourService();
+    if (cheapestTour.length === 0) {
+      res.status(400).json({
+        status: 'failed',
+        message: 'No data found. Please populate first',
+        cheapestTour,
+      });
+    }
+    res.status(200).json({
+      status: 'success',
+      message: 'cheapest tour found. @param array of objects',
+      cheapestTour,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'failed',
+      message: 'Server error. No data found.',
+      error,
+    });
+  }
 };
