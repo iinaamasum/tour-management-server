@@ -107,3 +107,14 @@ exports.patchTourByID = async (req, res, next) => {
     });
   }
 };
+
+exports.getTrendingTopTour = async (req, res, next) => {
+  const topTrendingTour = await TourModel.find()
+    .sort({ viewCount: -1 })
+    .limit(3);
+  res.status(400).json({
+    status: 'failed',
+    message: 'Server error. No data found.',
+    topTrendingTour,
+  });
+};

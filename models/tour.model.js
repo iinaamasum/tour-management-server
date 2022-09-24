@@ -56,6 +56,10 @@ const tourSchema = new mongoose.Schema(
           '{VALUE} is not accepted currency. Please select Taka/Dollar/Euro/Rupi',
       },
     },
+    viewCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

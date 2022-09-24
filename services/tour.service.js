@@ -12,13 +12,24 @@ exports.postTour = async (data) => {
 };
 
 exports.getTourByIDService = async (id) => {
+  const viewIncrement = await TourModel.updateOne(
+    { _id: id },
+    { $inc: { viewCount: 1 } }
+  );
   const result = await TourModel.findById(id);
-  return result;
+  if (viewIncrement.acknowledged) {
+    return result;
+  }
+  return { result, error: "Can't update the viewCount" };
 };
 
 exports.patchTourByIDService = async (id, data) => {
   const tour = await TourModel.findById(id);
   if (!tour) return { message: `Data not found with the id -> ${id}` };
-  const result = await TourModel.updateOne({ _id: id }, { $set: data });
+  const result = await TourModel.updateOne(
+    { _id: id },
+    { $set: data },
+    { runValidators: true }
+  );
   return result;
 };
