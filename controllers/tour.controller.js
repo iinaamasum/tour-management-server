@@ -11,7 +11,7 @@ exports.getAllTour = async (req, res, next) => {
         data: allTour,
       });
     }
-    res.status(400).json({
+    res.status(200).json({
       status: 'success',
       message: 'Below data is find for the req. @param: Array of objects',
       data: allTour,
