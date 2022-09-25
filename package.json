@@ -1,7 +1,7 @@
 {
   "name": "tour-management-system",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "license": "MIT",
   "author": "iinaamasum",
   "engines": {
@@ -16,7 +16,7 @@
     "validator": "^13.7.0"
   },
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   }
 }
