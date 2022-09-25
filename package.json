@@ -16,7 +16,7 @@
     "validator": "^13.7.0"
   },
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   }
 }
